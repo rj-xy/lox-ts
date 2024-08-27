@@ -1,1 +1,17 @@
+// Comments on a line
+xx
+/* single line */
+yy
+/*
+* multiline /*
+*/
+xx
 1+1
+(()){}
+
+var y = 24
+var x = 12
+"xxxx"
+if (x * 2 == y) {
+  print 
+}

@@ -8,7 +8,12 @@
     },
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "file",
+    "editor.rulers": [
+        80,
+        120
+    ],
+    "editor.tabSize": 2,
     "[typescript]": {
         "editor.defaultFormatter": "denoland.vscode-deno"
-    },
+    }
 }

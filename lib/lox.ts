@@ -1,7 +1,10 @@
 import { parseArgs } from 'jsr:@std/cli/parse-args'
+
 import Scanner from './scanner.ts'
 
 export default class Lox {
+  static hadError = false
+
   static async main() {
     const flags = parseArgs(Deno.args, {
       string: ['file'],
@@ -19,14 +22,22 @@ export default class Lox {
   static async runPrompt() {
     // read a line from the user
     const decoder = new TextDecoder()
-    for await (const chunk of Deno.stdin.readable) {
-      const text = decoder.decode(chunk)
-      if (text === null) {
+    const encoder = new TextEncoder()
+    const prompt = encoder.encode('> ')
+    const reader = Deno.stdin.readable.getReader()
+
+    do {
+      Deno.stdout.write(prompt)
+      const chunk = (await reader.read()).value
+      const line = decoder.decode(chunk)
+
+      if (!chunk) {
         break
       }
 
-      this.run(text.replace(/(\r\n|\n|\r)/gm, ''))
-    }
+      this.run(line)
+      Lox.hadError = false
+    } while (true)
   }
 
   static async runFile(file: string) {
@@ -36,6 +47,10 @@ export default class Lox {
     const source = await Deno.readTextFile(file)
 
     this.run(source)
+
+    if (Lox.hadError) {
+      Deno.exit(65)
+    }
   }
 
   static run(source: string) {
@@ -45,5 +60,14 @@ export default class Lox {
     for (const token of tokens) {
       console.log(token)
     }
+  }
+
+  static error(line: number, message: string) {
+    Lox.report(line, '', message)
+  }
+
+  static report(line: number, where: string, message: string) {
+    console.error(`[line ${line}] Error:${where} ${message}`)
+    Lox.hadError = true
   }
 }

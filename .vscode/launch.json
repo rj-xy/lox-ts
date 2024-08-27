@@ -1,0 +1,29 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "request": "launch",
+      "name": "Launch Program",
+      "type": "node",
+      "program": "${workspaceFolder}/lib/main.ts",
+      "cwd": "${workspaceFolder}",
+      "env": {},
+      "runtimeExecutable": "/home/rj/.deno/bin/deno",
+      "runtimeArgs": [
+        "run",
+        "--config",
+        "./deno.jsonc",
+        "--inspect-wait",
+        "--allow-all",
+      ],
+      "args": [
+        "--file",
+        "lox/add.lox"
+      ],
+      "attachSimplePort": 9229
+    }
+  ]
+}

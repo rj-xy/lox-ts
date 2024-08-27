@@ -1,20 +1,30 @@
 {
+  "version": "0.0.1",
+  // e.g. `deno task cache`
   "tasks": {
-    "dev": "deno run --watch lib/main.ts",
+    "cache": "deno cache lib/main.ts",
+    "repl": "deno run --allow-read --watch lib/main.ts",
+    "file": "deno run --allow-read --watch lib/main.ts --file lox/add.lox",
     "run": "deno run --allow-read lib/main.ts"
   },
   "lint": {
-    "include": ["src/"],
+    "include": [
+      "src/"
+    ],
     "rules": {
-      "tags": ["recommended"]
+      "tags": [
+        "recommended"
+      ]
     }
   },
   "fmt": {
     "useTabs": false,
-    "lineWidth": 120,
+    "lineWidth": 80,
     "indentWidth": 2,
     "semiColons": false,
     "singleQuote": true,
-    "include": ["src/"]
+    "include": [
+      "lib/**/*.ts"
+    ]
   }
 }
