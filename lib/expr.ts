@@ -12,12 +12,16 @@ export interface Visitor<R> {
   visitUnaryExpr(expr: Expr): R
 }
 
-abstract class Expr {
+export abstract class Expr {
   abstract accept<R>(visitor: Visitor<R>): R
 }
 
 export class Binary extends Expr {
-  constructor(left: Expr, operator: Token, right: Expr) {
+  constructor(
+    public readonly left: Expr,
+    public readonly operator: Token,
+    public readonly right: Expr,
+  ) {
     super()
   }
 

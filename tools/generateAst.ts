@@ -22,7 +22,7 @@ const defineAst = async (
   await writeln()
   await defineVisitorInterface(writeln, baseName, types)
   await writeln()
-  await writeln(`abstract class ${baseName} {`)
+  await writeln(`export abstract class ${baseName} {`)
   await writeln('  abstract accept<R>(visitor: Visitor<R>): R')
   await writeln('}')
 
@@ -61,9 +61,17 @@ const defineType = async (
   className: string,
   fields: string,
 ) => {
+  const fieldParams = fields
+    .split(',')
+    .map((field) => field.trim())
+    .map((field) => `public readonly ${field}`)
+    .join(', ')
+
   const classDef = `
 export class ${className} extends ${baseName} {
-  constructor(${fields}) {
+  constructor(
+    ${fieldParams}
+  ) {
     super()
   }
 

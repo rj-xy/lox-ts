@@ -5,7 +5,7 @@
   "tasks": {
     "build": "deno task cache && deno lint && deno fmt && deno check lib/main.ts",
     "cache": "deno cache lib/main.ts",
-    "gen-ast": "deno run --allow-run --allow-read --allow-write tools/generateAst.ts",
+    "gen-ast": "deno run --allow-run --allow-read --allow-write tools/generateAst.ts ./lib/",
     "repl": "deno run --allow-read --watch lib/main.ts",
     "file": "deno run --allow-read --watch lib/main.ts --file lox/add.lox",
     "run": "deno run --allow-read lib/main.ts"
