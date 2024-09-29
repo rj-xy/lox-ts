@@ -12,6 +12,13 @@ xx
 var y = 24
 var x = 12
 "xxxx"
+
 if (x * 2 == y) {
-  print 
+  print
+}
+
+if (x >= 10 ) {
+  if (y >= 20) {
+    var z = 30
+  }
 }

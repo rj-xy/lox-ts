@@ -16,7 +16,7 @@ export abstract class Expr {
   abstract accept<R>(visitor: Visitor<R>): R
 }
 
-export class Binary extends Expr {
+export class BinaryExpr extends Expr {
   constructor(
     public readonly left: Expr,
     public readonly operator: Token,
@@ -30,8 +30,10 @@ export class Binary extends Expr {
   }
 }
 
-export class Grouping extends Expr {
-  constructor(expression: Expr) {
+export class GroupingExpr extends Expr {
+  constructor(
+    public readonly expression: Expr,
+  ) {
     super()
   }
 
@@ -40,8 +42,10 @@ export class Grouping extends Expr {
   }
 }
 
-export class Literal extends Expr {
-  constructor(value: unknown) {
+export class LiteralExpr extends Expr {
+  constructor(
+    public readonly value: unknown,
+  ) {
     super()
   }
 
@@ -50,8 +54,11 @@ export class Literal extends Expr {
   }
 }
 
-export class Unary extends Expr {
-  constructor(operator: Token, right: Expr) {
+export class UnaryExpr extends Expr {
+  constructor(
+    public readonly operator: Token,
+    public readonly right: Expr,
+  ) {
     super()
   }
 
